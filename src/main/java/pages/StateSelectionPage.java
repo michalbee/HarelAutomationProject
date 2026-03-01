@@ -12,7 +12,7 @@ public class StateSelectionPage {
     }
 
 
-
+    //בחירת יבשה
     public void clickStateSelection(){
         stateSelectionBtn.findElement(driver).click();
     }

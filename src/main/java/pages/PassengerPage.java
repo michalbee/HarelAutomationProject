@@ -11,11 +11,12 @@ public class PassengerPage {
         this.driver=driver;
     }
 
-
+     //בדיקה שנכנס למסך בחירת נוסעים ע"י טקסט
     public String getTestPageTitle() {
+      System.out.println(driver.findElement(screenTitleTest).getText());
       return (driver.findElement(screenTitleTest).getText());
     }
-
+    //בדיקה שנכנס למסך בחירת נוסעים ע"י URL
     public boolean checkUrl(){
        return (driver.getCurrentUrl().equals("https://digital.harel-group.co.il/travel-policy/wizard/travelers"));
 

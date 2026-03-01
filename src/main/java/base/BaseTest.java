@@ -14,9 +14,10 @@ public class BaseTest {
     @BeforeMethod
     public void setup() {
         WebDriverManager.chromedriver().setup();
+
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         driver.get("https://digital.harel-group.co.il/travel-policy");
     }
 

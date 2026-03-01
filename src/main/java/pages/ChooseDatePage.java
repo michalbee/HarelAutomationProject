@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 public class ChooseDatePage {
@@ -19,32 +20,35 @@ public class ChooseDatePage {
     public ChooseDatePage(WebDriver driver) {
         this.driver=driver;
     }
-
+    //בחירת תאריך יציאה וחזרה
     public void clickSelectionDates(int departurePlusDays,int returnPlusDays) {
         plusDate=LocalDate.now().plusDays(departurePlusDays);
         dateValue=plusDate.toString();
         chooseDateBtn = By.xpath("//button[@data-hrl-bo='" + dateValue+ "']");
         chooseDateBtn.findElement(driver).click();//תאריך יציאה
 
+        driver.manage().timeouts().implicitlyWait(Duration.ofMinutes(9000));
         plusDate=LocalDate.now().plusDays(departurePlusDays+returnPlusDays);
         dateValue=plusDate.toString();
         chooseDateBtn = By.xpath("//button[@data-hrl-bo='" + dateValue+ "']");
         while (driver.findElements(chooseDateBtn).isEmpty()) {
             driver.findElement(cLickNextMonthBtn).click();
             // המתנה קצרה כדי שהטקסט של החודש יתעדכן
-            try { Thread.sleep(500); } catch (InterruptedException e) {}
+            try { Thread.sleep(999999); } catch (InterruptedException e) {}
         }
         chooseDateBtn.findElement(driver).click();
 
     }
-
+   //הדפסת סה"כ הימים שנבחרו
    public int getTotalTest(){
-      String  text=driver.findElement(totalDayTest).getText();
+       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3000));
+       String  text=driver.findElement(totalDayTest).getText();
        String onlyNumber = text.replaceAll("[^0-9]", "");
        return Integer.parseInt(onlyNumber);
    }
-
+    //לחיצה על כפתור הלאה...
     public void clickContinuBtn (){
+
       continueBtn.findElement(driver).click();
     }
 
